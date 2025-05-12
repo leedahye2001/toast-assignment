@@ -17,10 +17,10 @@ const RoundOption = () => {
   const [selected, setSelected] = useRecoilState(toastPositionAtom);
 
   return (
-    <div className="relative h-[400px] border rounded-xl p-6">
+    <div className="h-[400px] p-6">
       <div className="flex flex-col">
         <h3 className="pb-2 text-[16px] font-[700]">Position</h3>
-        <div className="grid grid-cols-1 gap-3 mb-8">
+        <div className="grid grid-cols-1 gap-3">
           {positions.map((pos) => (
             <label
               key={pos.value}
@@ -36,7 +36,7 @@ const RoundOption = () => {
                 onChange={() => setSelected(pos.value as ToastPosition)}
                 className="accent-blue-500"
               />
-              <span className="text-sm">{pos.label}</span>
+              <span className="text-[14px]">{pos.label}</span>
             </label>
           ))}
         </div>

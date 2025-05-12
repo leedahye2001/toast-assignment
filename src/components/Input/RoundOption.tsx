@@ -17,7 +17,7 @@ const RoundOption = () => {
   const [selected, setSelected] = useRecoilState(toastPositionAtom);
 
   return (
-    <div className="h-[400px] p-6">
+    <div className="h-[400px] p-6 w-full">
       <div className="flex flex-col">
         <h3 className="pb-2 text-[16px] font-[700]">Position</h3>
         <div className="grid grid-cols-1 gap-3">

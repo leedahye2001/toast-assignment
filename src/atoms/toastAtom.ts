@@ -12,3 +12,5 @@ export const toastAtom = atom<ToastItem[]>({
   key: "toastAtom",
   default: [],
 });
+
+export type ToastGroupMap = Record<ToastPosition, ToastItem[]>;

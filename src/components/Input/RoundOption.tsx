@@ -4,13 +4,13 @@ import {
   type ToastPosition,
 } from "../../atoms/toastPositionAtom";
 
-const positions = [
-  { label: "Top Left", value: "top-left" },
-  { label: "Top Center", value: "top-center" },
-  { label: "Top Right", value: "top-right" },
-  { label: "Bottom Left", value: "bottom-left" },
-  { label: "Bottom Center", value: "bottom-center" },
-  { label: "Bottom Right", value: "bottom-right" },
+const positions: ToastPosition[] = [
+  "top-left",
+  "top-center",
+  "top-right",
+  "bottom-left",
+  "bottom-center",
+  "bottom-right",
 ];
 
 const RoundOption = () => {
@@ -23,20 +23,20 @@ const RoundOption = () => {
         <div className="grid grid-cols-1 gap-3">
           {positions.map((pos) => (
             <label
-              key={pos.value}
+              key={pos}
               className={`flex items-center gap-2 cursor-pointer transition ${
-                selected === pos.value
+                selected === pos
               }`}
             >
               <input
                 type="radio"
                 name="position"
-                value={pos.value}
-                checked={selected === pos.value}
-                onChange={() => setSelected(pos.value as ToastPosition)}
+                value={pos}
+                checked={selected === pos}
+                onChange={() => setSelected(pos as ToastPosition)}
                 className="accent-blue-500"
               />
-              <span className="text-[14px]">{pos.label}</span>
+              <span className="text-[14px]">{pos}</span>
             </label>
           ))}
         </div>

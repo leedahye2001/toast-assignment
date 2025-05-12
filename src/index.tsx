@@ -4,14 +4,16 @@ import Input from "./components/Input/Input";
 import RoundOption from "./components/Input/RoundOption";
 import ToastContainer from "./components/Toast/ToastContainer";
 import { showToastMessage } from "./components/Toast/useToast";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 import { toastPositionAtom } from "./atoms/toastPositionAtom";
+import { toastAtom } from "./atoms/toastAtom";
 
 const Index = () => {
   const position = useRecoilValue(toastPositionAtom);
+  const resetToasts = useResetRecoilState(toastAtom);
   const [delay, setDelay] = useState<number | null>(3000);
 
-  const handleChange = (newDelay: string | null) => {
+  const handleInputChange = (newDelay: string | null) => {
     if (newDelay && isNaN(Number(newDelay))) {
       alert("숫자를 입력해주세요.");
     } else {
@@ -27,12 +29,17 @@ const Index = () => {
           <RoundOption />
           <Input
             _value={delay === null ? "" : delay.toString()}
-            _onChange={handleChange}
+            _onChange={handleInputChange}
           />
         </div>
         <Button
           _node="Toast Button"
           onClick={() => showToastMessage("Your Message", delay, position)}
+        />
+        <Button
+          _node="Clear all"
+          onClick={resetToasts}
+          className="bg-white text-red-500 font-[700]"
         />
       </div>
       <ToastContainer />

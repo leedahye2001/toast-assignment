@@ -19,7 +19,7 @@ const Input = ({ _value, _onChange }: InputProps) => {
   };
 
   return (
-    <div className="h-[400px] w-full p-6">
+    <div className="w-full p-6">
       <h3 className="pb-2 text-[16px] font-[700]">Delay (ms)</h3>
       <div className="grid mb-8">
         <input

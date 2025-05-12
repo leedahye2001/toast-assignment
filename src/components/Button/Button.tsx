@@ -1,7 +1,6 @@
 import { twMerge } from "tailwind-merge";
 
-interface ButtonProps {
-  _buttonProps?: React.ComponentProps<"button">;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   _node?: React.ReactNode;
 }
 
@@ -10,14 +9,14 @@ const buttonClasses = {
   "default-font": "text-[13px] text-white",
 };
 
-const Button = ({ _buttonProps, _node }: ButtonProps) => {
+const Button = ({ _node, className, ...rest }: ButtonProps) => {
   return (
     <button
-      {..._buttonProps}
+      {...rest}
       className={twMerge(
         buttonClasses.default,
         buttonClasses["default-font"],
-        _buttonProps?.className
+        className
       )}
     >
       {_node && <div className="flex items-center">{_node}</div>}

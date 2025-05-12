@@ -9,7 +9,15 @@ import { toastPositionAtom } from "./atoms/toastPositionAtom";
 
 const Index = () => {
   const position = useRecoilValue(toastPositionAtom);
-  const [delay, setDelay] = useState("3000");
+  const [delay, setDelay] = useState<number | null>(3000);
+
+  const handleChange = (newDelay: string | null) => {
+    if (newDelay && isNaN(Number(newDelay))) {
+      alert("숫자를 입력해주세요.");
+    } else {
+      setDelay(newDelay ? Number(newDelay) : null);
+    }
+  };
 
   return (
     <div className="flex h-[100vh] flex-col items-center justify-center">
@@ -17,16 +25,15 @@ const Index = () => {
         <h1 className="text-[26px] font-[800] text-black">Options</h1>
         <div className="flex border border-black my-2">
           <RoundOption />
-          <Input _value={Number(delay)} _onChange={setDelay} />
+          <Input
+            _value={delay === null ? "" : delay.toString()}
+            _onChange={handleChange}
+          />
         </div>
-        <Button _node="Toast Button" />
-        <button
-          onClick={() =>
-            showToastMessage("Your Message", Number(delay), position)
-          }
-        >
-          동작 버튼
-        </button>
+        <Button
+          _node="Toast Button"
+          onClick={() => showToastMessage("Your Message", delay, position)}
+        />
       </div>
       <ToastContainer />
     </div>

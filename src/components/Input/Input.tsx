@@ -1,20 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface InputProps {
-  _value?: number;
-  _onChange?: (value: string) => void;
+  _value?: string;
+  _onChange: (value: string | null) => void;
 }
 
-const Input = ({ _value, _onChange }: InputProps) => {
-  const [isText, setIstext] = useState<boolean>(true);
+const Input = ({ _value = "", _onChange }: InputProps) => {
+  const [inputValue, setInputValue] = useState<string>(_value);
+
+  useEffect(() => {
+    setInputValue(_value);
+  }, [_value]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    setInputValue(value);
 
-    setIstext(true);
-
-    if (_onChange) {
+    if (value === "") {
+      _onChange(null);
+    } else if (!isNaN(Number(value))) {
       _onChange(value);
+    } else {
+      alert("숫자를 입력해주세요.");
     }
   };
 
@@ -23,7 +30,8 @@ const Input = ({ _value, _onChange }: InputProps) => {
       <h3 className="pb-2 text-[16px] font-[700]">Delay (ms)</h3>
       <div className="grid mb-8">
         <input
-          value={_value}
+          type="text"
+          value={_value || ""}
           onChange={handleChange}
           className="text-[14px] focus-within:bg-[#f1f1f1] ring-1 ring-black text-end"
         />

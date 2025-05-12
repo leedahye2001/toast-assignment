@@ -1,4 +1,5 @@
 import Button from "./components/Button/Button";
+import RoundOption from "./components/Input/RoundOption";
 
 const Index = () => {
   return (
@@ -6,6 +7,7 @@ const Index = () => {
       <h1 className="text-[20px] font-[800] text-black">홈</h1>
 
       <Button _node={"Toast Button"} />
+      <RoundOption />
     </div>
   );
 };
